@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CyberCat English</title>
+
+<style>
+body {
+  background: radial-gradient(circle, #050b14, #000);
+  color: #00ffcc;
+  font-family: monospace;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 25px;
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #00ffcc44;
+}
+
+.cat {
+  width: 160px;
+  margin-bottom: 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+#instruction {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #9ff;
+}
+
+#word {
+  font-size: 28px;
+  margin: 15px 0;
+  color: #fff;
+}
+
+input {
+  padding: 10px;
+  width: 70%;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 15px;
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ccaa;
+}
+
+#result {
+  margin-top: 15px;
+  font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+  <img src="cat.gif" class="cat">
+  <h1>CyberCat English 🐱‍💻</h1>
+  <h2 id="level">Level 1</h2>
+
+  <p id="instruction">
+    Translate this technical word into English
+  </p>
+
+  <p id="word"></p>
+
+  <input type="text" id="answer" placeholder="Type in English">
+
+  <br>
+  <button onclick="checkAnswer()">Hack System</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+const words = [
+  {es:"algoritmo", en:"algorithm"},
+  {es:"base de datos", en:"database"},
+  {es:"servidor", en:"server"},
+  {es:"cliente", en:"client"},
+  {es:"red", en:"network"},
+  {es:"código", en:"code"},
+  {es:"variable", en:"variable"},
+  {es:"función", en:"function"},
+  {es:"bucle", en:"loop"},
+  {es:"arreglo", en:"array"},
+  {es:"objeto", en:"object"},
+  {es:"clase", en:"class"},
+  {es:"compilador", en:"compiler"},
+  {es:"error", en:"bug"},
+  {es:"depurar", en:"debug"},
+  {es:"framework", en:"framework"},
+  {es:"backend", en:"backend"},
+  {es:"frontend", en:"frontend"},
+  {es:"API", en:"api"},
+  {es:"nube", en:"cloud"},
+  {es:"seguridad", en:"security"},
+  {es:"encriptación", en:"encryption"},
+  {es:"firewall", en:"firewall"},
+  {es:"protocolo", en:"protocol"},
+  {es:"memoria", en:"memory"},
+  {es:"CPU", en:"cpu"},
+  {es:"RAM", en:"ram"},
+  {es:"almacenamiento", en:"storage"},
+  {es:"terminal", en:"terminal"},
+  {es:"comando", en:"command"},
+  {es:"repositorio", en:"repository"},
+  {es:"versión", en:"version"},
+  {es:"git", en:"git"},
+  {es:"script", en:"script"},
+  {es:"software", en:"software"},
+  {es:"hardware", en:"hardware"},
+  {es:"interfaz", en:"interface"},
+  {es:"sistema", en:"system"},
+  {es:"navegador", en:"browser"},
+  {es:"sitio web", en:"website"},
+  {es:"hosting", en:"hosting"},
+  {es:"deploy", en:"deploy"},
+  {es:"kernel", en:"kernel"},
+  {es:"binario", en:"binary"},
+  {es:"lógica", en:"logic"},
+  {es:"estructura de datos", en:"data structure"},
+  {es:"programación", en:"programming"},
+  {es:"ingeniería de sistemas", en:"systems engineering"}
+];
+
+let level = 0;
+
+function loadWord() {
+  document.getElementById("level").innerText = "Level " + (level + 1);
+  document.getElementById("word").innerText = words[level].es;
+  document.getElementById("answer").value = "";
+  document.getElementById("result").innerText = "";
+}
+
+function checkAnswer() {
+  let user = document.getElementById("answer").value.trim().toLowerCase();
+  let correct = words[level].en.toLowerCase();
+
+  if (user === correct) {
+    document.getElementById("result").innerText = "✔ Access Granted!";
+    level++;
+
+    if (level < words.length) {
+      setTimeout(loadWord, 900);
+    } else {
+      document.getElementById("game").innerHTML = `
+        <img src="cat.gif" class="cat">
+        <h1>Mission Completed 🎉</h1>
+        <p>The CyberCat is proud of you.</p>
+        <p>You mastered technical English 🐱‍💻</p>
+      `;
+    }
+  } else {
+    document.getElementById("result").innerText = "❌ Access Denied. Try again.";
+  }
+}
+
+loadWord();
+</script>
+
+</body>
+</html>
